@@ -1,36 +1,36 @@
-# Project PROJECT_NAME
+# Project SPINNERSCORGE
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
 ### Student Info
 
--   Name: YOUR NAME
--   Section: ##
+-   Name: AUDEN CLIFFORD
+-   Section: #02
 
 ## Game Design
 
--   Camera Orientation: _How are the art assets viewed from? (ie. topdown or side)_
--   Camera Movement: _How does the camera move in your game? (if at all)_
--   Player Health: _How are you handling player health? (healthbar, lives, ?)_
--   End Condition: _How does a game/round/level end?_
--   Scoring: _How does the player earn points in your game?_
+-   Camera Orientation: topdown
+-   Camera Movement: follows player
+-   Player Health: heathbar; tied to rotational velocity (you die when you stop spinning)
+-   End Condition: game ends when the player dies; the object is to get as high a score as possible before that happens
+-   Scoring: kills and time; time acts as base points, kills multiply score
 
 ### Game Description
 
-_A brief explanation of your game. Inculde what is the objective for the player. Think about what would go on the back of a game box._
+SPINNERSCORGE, beyblades with guns. In spinnerscorge, you play as a spinner/top and must survive as long as possible against other spinners. If you stop spinning your out of the game, you loose rotation speed by being hit by other spinners and gain rotation when you get kills. Whenever two spinners collide they both lose some rotation speed and go flying apart! However, the player is equipped with a gun which can chip away at enemy spinner's rotation at range. The player only regains speed from kills done via bumping into enemies. Therefore the player must use the gun to slow down enemies and then go in for the kill at melee range.
 
 ### Controls
 
 -   Movement
-    -   Up: 
-    -   Down: 
-    -   Left: 
-    -   Right: 
+    -   Up: W
+    -   Down: S
+    -   Left: A
+    -   Right: D
 -   Fire: 
 
 ## You Additions
 
-_List out what you added to your game to make it different for you_
+The additions I made are the health system being tied to rotation, and the unique way kills effect said health system.
 
 ## Sources
 
