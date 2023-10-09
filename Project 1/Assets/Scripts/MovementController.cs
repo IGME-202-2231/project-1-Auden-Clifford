@@ -8,9 +8,19 @@ public class MovementController : MonoBehaviour
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
-    float speed = 5f;
+    float speed = 0.01f;
 
-    
+    /// <summary>
+    /// Gets or sets the direction of movement (normalized)
+    /// </summary>
+    internal Vector3 Direction
+    {
+        get { return direction; }
+        set
+        {
+            direction = value.normalized;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +36,8 @@ public class MovementController : MonoBehaviour
         // this creates acceleration based movement rather than linear movement
         velocity += direction * speed * Time.deltaTime;
 
-        // apply some friction over time
-        velocity *= 0.9f;
-
-        // the magnitude of velocity will never reach 0 when friction is applied in this way
-        // therefore once velocity is below 0.1f, it will jump to 0
-        if(velocity.magnitude <= 0.1f)
-        {
-            velocity = Vector3.zero;
-        }
+        // apply some friction to slow down over time
+        velocity *= 0.999f;
 
         // add velocity to position
         objectPosition += velocity;
@@ -43,5 +46,16 @@ public class MovementController : MonoBehaviour
 
         // draw the object at the new position
         transform.position = objectPosition;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // draw a line for the input direction
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(objectPosition, objectPosition + (direction * 2));
+
+        // draw a line for the velocity
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(objectPosition, objectPosition + (velocity * 500));
     }
 }
