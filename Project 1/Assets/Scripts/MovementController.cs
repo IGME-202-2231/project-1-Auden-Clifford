@@ -37,6 +37,7 @@ public class MovementController : MonoBehaviour
         velocity += direction * speed * Time.deltaTime;
 
         // apply some friction to slow down over time
+        // player will lose 0.1% of velocity every second
         velocity *= 0.999f;
 
         // add velocity to position
