@@ -8,6 +8,9 @@ public class MovementController : MonoBehaviour
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
+    [SerializeField] float angularVelocity = 1000;
+    float totalRotation = 0;
+
     float speed = 0.01f;
 
     /// <summary>
@@ -39,6 +42,7 @@ public class MovementController : MonoBehaviour
         // apply some friction to slow down over time
         // player will lose 0.1% of velocity every second
         velocity *= 0.999f;
+        angularVelocity *= 0.99999f;
 
         // add velocity to position
         objectPosition += velocity;
@@ -46,7 +50,12 @@ public class MovementController : MonoBehaviour
         // validate position (collide)
 
         // draw the object at the new position
-        transform.position = objectPosition;
+        this.transform.position = objectPosition;
+
+        totalRotation += angularVelocity * Time.deltaTime;
+
+        // rotating the object itself caused problems with movement, therefore only the sprite (the first child of the object) should rotate 
+        this.transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0,0,totalRotation);
     }
 
     private void OnDrawGizmos()
