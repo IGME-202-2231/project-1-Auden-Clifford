@@ -8,7 +8,7 @@ public class MovementController : MonoBehaviour
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
-    [SerializeField] float angularVelocity = 1000;
+    float angularVelocity = 833;
     float totalRotation = 0;
 
     float speed = 0.01f;
@@ -42,7 +42,7 @@ public class MovementController : MonoBehaviour
         // apply some friction to slow down over time
         // player will lose 0.1% of velocity every second
         velocity *= 0.999f;
-        angularVelocity *= 0.99999f;
+        //angularVelocity *= 0.99999f;
 
         // add velocity to position
         objectPosition += velocity;
