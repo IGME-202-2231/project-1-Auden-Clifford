@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
 
     private float speed = 20;
 
+    // bullets should be removed after some amount of time
+    [SerializeField] private float lifespan = 5;
+
     /// <summary>
     /// Gets or sets the direction of movement (normalized)
     /// </summary>
@@ -26,7 +29,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Grab the GameObject’s starting position
+        // Grab the GameObjectï¿½s starting position
         position = transform.position;
     }
 
@@ -42,5 +45,14 @@ public class Bullet : MonoBehaviour
 
         // change rotation to face direction
         //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+
+        // count down the seconds since the object was created
+        lifespan -= Time.deltaTime;
+
+        // remove the object when it's lifespan ends
+        if(lifespan < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
