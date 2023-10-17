@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2134655122719867536}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5508625034940268835
 MonoBehaviour:
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.21
+  sprite: {fileID: 8507001672195922250}
   collisions: []
 --- !u!114 &6188318905891369059
 MonoBehaviour:
@@ -138,5 +139,10 @@ PrefabInstance:
 --- !u!4 &2134655122719867536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8742538545776668643, guid: 24149c4e71d00844db585fbe311c1984, type: 3}
+  m_PrefabInstance: {fileID: 7263301223770631539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8507001672195922250 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: -7871556540511652807, guid: 24149c4e71d00844db585fbe311c1984, type: 3}
   m_PrefabInstance: {fileID: 7263301223770631539}
   m_PrefabAsset: {fileID: 0}

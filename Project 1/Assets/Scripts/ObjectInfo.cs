@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectInfo : MonoBehaviour
 {
     [SerializeField] float radius;
-    //[SerializeField] CollisionManager collisionManager;
+    [SerializeField] SpriteRenderer sprite;
 
     // when CollisionManager detects a collision, the object that this object collided
     // with will be sent here so that the objects can resolve the collision internally
@@ -40,7 +40,16 @@ public class ObjectInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // change the sprite color in response to collisions
+        //  this is only because red gizmos do not show up in builds
+        if (collisions.Count > 0)
+        {
+            sprite.color = Color.red;
+        }
+        else
+        {
+            sprite.color = Color.white;
+        }
     }
 
     private void OnDrawGizmos()

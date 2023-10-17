@@ -119,7 +119,7 @@ Transform:
   m_Children:
   - {fileID: 2666729545856598395}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &841932600908343556
 MonoBehaviour:
@@ -276,5 +276,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.21
-  collisionManager: {fileID: 0}
+  sprite: {fileID: 5661870326000753313}
   collisions: []
