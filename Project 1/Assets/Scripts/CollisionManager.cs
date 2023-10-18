@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionManager : MonoBehaviour
+public class CollisionManager : Singleton<CollisionManager>
 {
     private List<ObjectInfo> gameObjects = new List<ObjectInfo>();
 
@@ -38,6 +38,6 @@ public class CollisionManager : MonoBehaviour
             }
         }
 
-        //print(gameObjects.Count);
+        print(gameObjects.Count);
     }
 }

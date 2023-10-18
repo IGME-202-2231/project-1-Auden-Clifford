@@ -63,7 +63,7 @@ public class PhysicsObject : MonoBehaviour
     {
         Vector3 friction = velocity * -1;
         friction.Normalize();
-        friction = friction * 1.5f;
+        friction = friction * 5;
         ApplyForce(friction);
     }
 

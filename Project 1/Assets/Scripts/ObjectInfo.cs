@@ -42,7 +42,7 @@ public class ObjectInfo : MonoBehaviour
     {
         // when an object is instantiated (either mid-game or at the beginning)
         // it should add itself to the Collision Manager's object list
-        Singleton<CollisionManager>.Instance.GameObjects.Add(this);
+        CollisionManager.Instance.GameObjects.Add(this);
     }
 
     // Update is called once per frame
@@ -78,6 +78,6 @@ public class ObjectInfo : MonoBehaviour
     private void OnDestroy()
     {
         // when objects are destroyed they should remove themselves from the scene
-        Singleton<CollisionManager>.Instance.GameObjects.Remove(this);
+        CollisionManager.Instance.GameObjects.Remove(this);
     }
 }

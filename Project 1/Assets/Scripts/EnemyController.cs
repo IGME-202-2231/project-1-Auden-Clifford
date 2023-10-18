@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] PhysicsObject physicsMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<MovementController>().Direction = player.transform.position - transform.position;
+        physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * 15);
     }
 }

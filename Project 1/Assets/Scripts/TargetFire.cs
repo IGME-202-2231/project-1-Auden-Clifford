@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetFire : MonoBehaviour
 {
     [SerializeField] private GameObject ammunition;
-    [SerializeField] private MovementController movementController;
+    //[SerializeField] private MovementController movementController;
 
     // Start is called before the first frame update
     void Start()
