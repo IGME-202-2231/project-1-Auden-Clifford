@@ -12,10 +12,10 @@ public class InputController : MonoBehaviour
         
     }
 
-    //[SerializeField] private PhysicsObject playerControlledObject;
-    //[SerializeField] private float accelSpeed;
-    //private Vector2 direction;
-    [SerializeField] private MovementController playerControlledObject;
+    [SerializeField] private PhysicsObject playerControlledObject;
+    [SerializeField] private float accelSpeed;
+    private Vector2 direction;
+    //[SerializeField] private MovementController playerControlledObject;
     [SerializeField] private TargetFire playerWeapon;
     
     // The method that gets called to handle any player movement input
@@ -23,9 +23,9 @@ public class InputController : MonoBehaviour
     {
         // Get the latest value for the input from the Input 
         // System and send that new direction to the Vehicle class
-        playerControlledObject.Direction = context.ReadValue<Vector2>();
+        //playerControlledObject.Direction = context.ReadValue<Vector2>();
 
-        //direction = context.ReadValue<Vector2>();
+        direction = context.ReadValue<Vector2>();
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -37,11 +37,10 @@ public class InputController : MonoBehaviour
         }
     }
 
-    /*
+    
     // Update is called once per frame
     void Update()
     {
         playerControlledObject.ApplyForce(direction * accelSpeed);
     }
-    */
 }

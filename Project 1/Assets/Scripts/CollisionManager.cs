@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    // all objects need to add themselves to this therefore it must be universally available
-    public static List<ObjectInfo> gameObjects = new List<ObjectInfo>();
+    private List<ObjectInfo> gameObjects = new List<ObjectInfo>();
+
+    /// <summary>
+    /// Gets a reference to the list of collidable game objects
+    /// </summary>
+    public List<ObjectInfo> GameObjects
+    {
+        get { return gameObjects; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +44,6 @@ public class CollisionManager : MonoBehaviour
             }
         }
 
-        print(gameObjects.Count);
+        //print(gameObjects.Count);
     }
 }
