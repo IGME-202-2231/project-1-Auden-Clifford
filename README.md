@@ -17,7 +17,7 @@
 
 ### Game Description
 
-SPINNERSCORGE, beyblades with guns. In spinnerscorge, you play as a spinner/top and must survive as long as possible against other spinners. If you stop spinning your out of the game, you loose rotation speed by being hit by other spinners and gain rotation when you get kills. Whenever two spinners collide they both lose some rotation speed and go flying apart! However, the player is equipped with a gun which can chip away at enemy spinner's rotation at range. The player only regains speed from kills done via bumping into enemies. Therefore the player must use the gun to slow down enemies and then go in for the kill at melee range.
+SPINNERSCORGE, beyblades with guns. In spinnerscorge, you play as a spinner/top and must survive as long as possible against other spinners. If you stop spinning your out of the game, you loose rotation speed by being hit by other spinners and gain rotation when you get kills. Spinners are subject to physics based collision, in other words, they hit each other and go flying! However, guns can chip away at enemy spinner's rotation at range, acting like a "slow beam" for rotational speed. Careful, some enemies have guns too. The player only regains speed from kills done via bumping into enemies. Therefore the player must use the gun to slow down enemies and then go in for the kill at melee range.
 
 ### Controls
 
@@ -26,11 +26,11 @@ SPINNERSCORGE, beyblades with guns. In spinnerscorge, you play as a spinner/top 
     -   Down: S
     -   Left: A
     -   Right: D
--   Fire: 
+-   Fire: SPACEBAR
 
-## You Additions
+## Your Additions
 
-The additions I made are the health system being tied to rotation, and the unique way kills effect said health system.
+Unlike many Shmup games, this game will have physics-based interactions between the characters on screen. Additionally, these physics-based interations are tied directly to health. When two spinners collide they loose rotational speed, when rotational speed falls to 0 the spinner dies. This applies to both the player and the enemies. This also means that friendly fire between enemy spinners is possible.
 
 ## Sources
 
@@ -39,7 +39,7 @@ The additions I made are the health system being tied to rotation, and the uniqu
 
 ## Known Issues
 
-_List any errors, lack of error checking, or specific information that I need to know to run your program_
+- bullets fired by the player collide with the player
 
 ### Requirements not completed
 

@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector3 position;
-    private Vector3 direction;
-    private float speed = 5f;
+    private Vector3 position = Vector3.zero;
+    [SerializeField] private Vector3 direction = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
-    private GameObject originator;
+    private float speed = 20;
 
-    /// <summary>
-    /// Gets or sets the originator (shooter) of this bullet
-    /// </summary>
-    internal GameObject Originator
-    {
-        get { return originator; }
-        set { originator = value; }
-    }
+    // bullets should be removed after some amount of time
+    [SerializeField] private float lifespan = 5;
 
     /// <summary>
     /// Gets or sets the direction of movement (normalized)
@@ -28,33 +21,38 @@ public class Bullet : MonoBehaviour
         get { return direction; }
         set
         {
-            direction = value.normalized;
+            // direction should only have an x and y value, no z value
+            direction = new Vector2(value.x, value.y).normalized;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // get the object's position
+        // Grab the GameObject�s starting position
         position = transform.position;
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        
+        //velocity = direction * speed * Time.deltaTime;
 
+        // add velocity to position
         position += direction * speed * Time.deltaTime;
 
-        //validate
-
-        // set the position
         transform.position = position;
 
-        if(direction != Vector3.zero)
+        // change rotation to face direction
+        //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+
+        // count down the seconds since the object was created
+        lifespan -= Time.deltaTime;
+
+        // remove the object when it's lifespan ends
+        if(lifespan < 0)
         {
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            Destroy(gameObject);
         }
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    Vector3 objectPosition = Vector3.zero;
-    Vector3 direction = Vector3.zero;
-    Vector3 velocity = Vector3.zero;
+    private Vector3 objectPosition = Vector3.zero;
+    private Vector3 direction = Vector3.zero;
+    internal Vector3 velocity = Vector3.zero;
 
-    float angularVelocity = 833;
-    float totalRotation = 0;
+    private float angularVelocity = 833;
+    private float totalRotation = 0;
 
-    float speed = 0.01f;
+    private float speed = 0.01f;
 
     /// <summary>
     /// Gets or sets the direction of movement (normalized)
