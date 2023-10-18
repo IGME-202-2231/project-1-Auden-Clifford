@@ -11,8 +11,6 @@ public class PhysicsObject : MonoBehaviour
     private Vector3 velocity;
     private Vector3 acceleration;
 
-    private float mass;
-
     private float maxSpeed = 100;
 
     // Start is called before the first frame update
@@ -20,8 +18,6 @@ public class PhysicsObject : MonoBehaviour
     {
         // get the object's starting postion
         position = transform.position;
-
-        mass = 0.5f;
     }
 
     // Update is called once per frame
@@ -57,7 +53,7 @@ public class PhysicsObject : MonoBehaviour
     /// <param name="force">Force vector applied</param>
     public void ApplyForce(Vector3 force)
     {
-        acceleration += force / mass;
+        acceleration += force / objectInfo.Mass;
     }
 
     /// <summary>

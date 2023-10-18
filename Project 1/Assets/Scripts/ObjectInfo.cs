@@ -20,6 +20,14 @@ public class ObjectInfo : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the mass of the object, equal to the area of the object
+    /// </summary>
+    public float Mass
+    {
+        get { return Mathf.PI * Mathf.Pow(radius, 2); }
+    }
+
+    /// <summary>
     /// Gets or sets whether the object is currently colliding with someting
     /// </summary>
     public bool IsColliding { get; set; }
