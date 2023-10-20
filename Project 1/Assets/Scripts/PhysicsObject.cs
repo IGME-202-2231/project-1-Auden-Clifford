@@ -99,4 +99,12 @@ public class PhysicsObject : MonoBehaviour
 
         //print(collisions.Count);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(position, position + velocity);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(position, position + acceleration);
+    }
 }
