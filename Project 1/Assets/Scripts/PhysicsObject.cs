@@ -86,7 +86,7 @@ public class PhysicsObject : MonoBehaviour
             Vector3 otherContactPoint = otherObject.Position + (position - otherObject.Position).normalized * otherObject.Radius;
 
             // ensure the objcts are still intersecting (the intersect may have been eliminated by the other object)
-            // this object should only be the one to move if it is smaller
+            // this object should only be the one to move out of the intersection if it is smaller
             if(Vector3.Distance(position, otherObject.Position) < objectInfo.Radius + otherObject.Radius && objectInfo.Mass <= otherObject.Mass)
             {
                 // move this object to eliminate overlap between contact points 
@@ -98,13 +98,5 @@ public class PhysicsObject : MonoBehaviour
         }
 
         //print(collisions.Count);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(position, position + velocity);
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(position, position + acceleration);
     }
 }
