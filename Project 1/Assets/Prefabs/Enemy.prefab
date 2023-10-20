@@ -49,7 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.21
   sprite: {fileID: 8507001672195922250}
-  collisions: []
+  physics: {fileID: 3729130997991142718}
+  mass: 10
 --- !u!114 &6188318905891369059
 MonoBehaviour:
   m_ObjectHideFlags: 0

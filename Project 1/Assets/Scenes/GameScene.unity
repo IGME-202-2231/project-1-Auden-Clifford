@@ -276,6 +276,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6380093477314089134, guid: 3f0a7872b6e6f604589229721cba1eab, type: 3}
   m_PrefabInstance: {fileID: 7935909480670633577}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1158942860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8448910542681071160, guid: 3f0a7872b6e6f604589229721cba1eab, type: 3}
+  m_PrefabInstance: {fileID: 7935909480670633577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158942859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7734342a6dda7b04eba43847af44646d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7541028676069556519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1610259643038018881, guid: 3f0a7872b6e6f604589229721cba1eab, type: 3}
@@ -337,6 +348,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7317485018922105422, guid: 3f0a7872b6e6f604589229721cba1eab, type: 3}
+      propertyPath: physics
+      value: 
+      objectReference: {fileID: 1158942860}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

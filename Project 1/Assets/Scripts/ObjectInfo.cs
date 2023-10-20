@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class ObjectInfo : MonoBehaviour
 {
-    [SerializeField] float radius;
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] private float radius;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] public PhysicsObject physics;
+    [SerializeField] private float mass;
 
     // when CollisionManager detects a collision, the object that this object collided
     // with will be sent here so that the objects can resolve the collision internally
-    public List<ObjectInfo> collisions = new List<ObjectInfo>();
+    internal List<ObjectInfo> collisions = new List<ObjectInfo>();
+
+    /*
+    /// <summary>
+    /// Gets a reference to this object's collision list
+    /// </summary>
+    public List<ObjectInfo> Collisions
+    { get { return collisions; } }
+    */
 
     /// <summary>
     /// Gets the radius of the bounding circle
@@ -24,7 +34,7 @@ public class ObjectInfo : MonoBehaviour
     /// </summary>
     public float Mass
     {
-        get { return Mathf.PI * Mathf.Pow(radius, 2); }
+        get { return mass; /*return Mathf.PI * Mathf.Pow(radius, 2)*/; }
     }
 
     /// <summary>
@@ -35,7 +45,7 @@ public class ObjectInfo : MonoBehaviour
     /// <summary>
     /// Gets this object's current position
     /// </summary>
-    public Vector2 Position { get { return transform.position; } }
+    public Vector3 Position { get { return transform.position; } }
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +87,10 @@ public class ObjectInfo : MonoBehaviour
 
     private void OnDestroy()
     {
-        // when objects are destroyed they should remove themselves from the scene
-        CollisionManager.Instance.GameObjects.Remove(this);
+        if(CollisionManager.Instance != null)
+        {
+            // when objects are destroyed they should remove themselves from the scene
+            CollisionManager.Instance.GameObjects.Remove(this);
+        }
     }
 }
