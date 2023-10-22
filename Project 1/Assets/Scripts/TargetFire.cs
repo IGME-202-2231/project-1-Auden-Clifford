@@ -24,5 +24,8 @@ public class TargetFire : MonoBehaviour
         GameObject bullet = Instantiate(ammunition, transform.position, Quaternion.identity);
 
         bullet.GetComponent<Bullet>().Direction = direction;
+
+        //assign this bullet's originator to this object
+        bullet.GetComponent<Bullet>().Originator = this.GetComponent<ObjectInfo>();
     }
 }

@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ObjectType
+{
+    Projectile,
+    Spinner
+}
+
 public class ObjectInfo : MonoBehaviour
 {
     [SerializeField] private float radius;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] public PhysicsObject physics;
-    [SerializeField] private float mass;
+    [SerializeField] private ObjectType type;
+    //[SerializeField] private float mass;
 
     // when CollisionManager detects a collision, the object that this object collided
     // with will be sent here so that the objects can resolve the collision internally
@@ -22,6 +29,11 @@ public class ObjectInfo : MonoBehaviour
     */
 
     /// <summary>
+    /// Gets the object's type
+    /// </summary>
+    public ObjectType Type { get { return type; } }
+
+    /// <summary>
     /// Gets the radius of the bounding circle
     /// </summary>
     public float Radius
@@ -34,7 +46,7 @@ public class ObjectInfo : MonoBehaviour
     /// </summary>
     public float Mass
     {
-        get { return mass; /*return Mathf.PI * Mathf.Pow(radius, 2)*/; }
+        get { /*return mass;*/ return Mathf.PI * Mathf.Pow(radius, 2); }
     }
 
     /// <summary>
@@ -58,6 +70,7 @@ public class ObjectInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         // change the sprite color in response to collisions
         //  this is only because red gizmos do not show up in builds
         if (collisions.Count > 0)
@@ -68,10 +81,12 @@ public class ObjectInfo : MonoBehaviour
         {
             sprite.color = Color.white;
         }
+        */
     }
 
     private void OnDrawGizmos()
     {
+        /*
         // if there are any unresolved collisions, the gizmos should be red
         if (collisions.Count > 0)
         {
@@ -83,6 +98,7 @@ public class ObjectInfo : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(transform.position, radius);
+        */
     }
 
     private void OnDestroy()

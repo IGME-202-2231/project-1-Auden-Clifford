@@ -1,17 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] ObjectInfo objectInfo;
+
     private Vector3 position = Vector3.zero;
     [SerializeField] private Vector3 direction = Vector3.zero;
-    private Vector3 velocity = Vector3.zero;
+    //private Vector3 velocity = Vector3.zero;
 
     private float speed = 20;
+    [SerializeField] private float damage;
 
     // bullets should be removed after some amount of time
     [SerializeField] private float lifespan = 5;
+
+    /// <summary>
+    /// Gets or sets the object that shot this bullet
+    /// </summary>
+    public ObjectInfo Originator { get; set; }
 
     /// <summary>
     /// Gets or sets the direction of movement (normalized)
@@ -36,6 +45,8 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ResolveCollisions(objectInfo.collisions);
+
         //velocity = direction * speed * Time.deltaTime;
 
         // add velocity to position
@@ -54,5 +65,32 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Resolves all collisions dretected this frame; ignores the originator and dissapears when it hits something else
+    /// </summary>
+    /// <param name="collisions">A list containing all the collisions detected this frame</param>
+    private void ResolveCollisions(List<ObjectInfo> collisions)
+    {
+        foreach(ObjectInfo otherObject in collisions)
+        {
+            if(otherObject != Originator)
+            {
+                Gizmos.color = Color.red;
+
+                otherObject.physics.SlowSpin(damage);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, objectInfo.Radius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + direction);
+
+        Gizmos.color = Color.white;
     }
 }

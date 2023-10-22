@@ -41,8 +41,6 @@ public class BackgroundController : MonoBehaviour
             this.transform.position = new Vector2(
                 this.transform.position.x + backgroundSize.x,
                 this.transform.position.y); // background y value is preserved
-
-            print(this.transform.position.x);
         }
 
         // check if the player is beyond gone beyond the left edge
@@ -52,8 +50,6 @@ public class BackgroundController : MonoBehaviour
             this.transform.position = new Vector2(
                 this.transform.position.x - backgroundSize.x,
                 this.transform.position.y); // background y value is preserved
-
-            print(this.transform.position.x);
         }
 
         // check if the player is beyond gone above the top edge

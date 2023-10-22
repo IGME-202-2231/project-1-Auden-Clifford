@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2635521382ecf34e9095e71629c64a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInfo: {fileID: 1499253194717466995}
   direction: {x: 0, y: 0, z: 0}
+  damage: 5
   lifespan: 10
 --- !u!114 &1499253194717466995
 MonoBehaviour:
@@ -114,4 +116,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.25
   sprite: {fileID: 8053385141590117817}
-  collisions: []
+  physics: {fileID: 0}
+  type: 0
