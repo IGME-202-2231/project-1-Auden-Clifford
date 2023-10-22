@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 375221785618919771}
+  sprite: {fileID: 3370165315153456810}
+  angularVelocity: 100
 --- !u!1 &3370165315153456810
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,12 +5,15 @@ using UnityEngine;
 public class PhysicsObject : MonoBehaviour
 {
     [SerializeField] ObjectInfo objectInfo;
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] GameObject sprite;
 
     private Vector3 position;
     private Vector3 direction;
     private Vector3 velocity;
     private Vector3 acceleration;
+
+    [SerializeField] private float angularVelocity;
+    private float totalRotation = 0;
 
     private float maxSpeed = 100;
 
@@ -39,14 +42,20 @@ public class PhysicsObject : MonoBehaviour
         //print(velocity.magnitude);
         //print("calcPos: " + position.x + ", " + position.y + "\n actualPos: " + transform.position.x + ", " + transform.position.y);
 
-        // set the postion
+        // calculate the postion
         position += velocity * Time.deltaTime;
+
+        // calculate the rotation
+        totalRotation += angularVelocity * Time.deltaTime;
         
         // grab direction from velocity
         direction = velocity.normalized;
 
         // set the object's postion to calculated position
         transform.position = position;
+
+        // rotate the sprite
+        sprite.transform.rotation = Quaternion.Euler(0, 0, totalRotation);
 
         // zero out acceleration
         acceleration = Vector3.zero;
@@ -67,6 +76,7 @@ public class PhysicsObject : MonoBehaviour
     /// <param name="amount">Amount deducted from rotational velodity</param>
     public void SlowSpin(float amount)
     {
+        angularVelocity -= amount;
         print("oh no, I got hit!");
         Gizmos.color = Color.red;
     }

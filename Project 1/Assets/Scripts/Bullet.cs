@@ -80,6 +80,9 @@ public class Bullet : MonoBehaviour
                 Gizmos.color = Color.red;
 
                 otherObject.physics.SlowSpin(damage);
+
+                // bullets should be destroyed when the reach a target
+                Destroy(gameObject);
             }
         }
     }
