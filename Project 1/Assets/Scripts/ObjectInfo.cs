@@ -105,7 +105,7 @@ public class ObjectInfo : MonoBehaviour
     {
         if(CollisionManager.Instance != null)
         {
-            // when objects are destroyed they should remove themselves from the scene
+            // when objects are destroyed they should remove themselves from the collision manager
             CollisionManager.Instance.GameObjects.Remove(this);
         }
     }

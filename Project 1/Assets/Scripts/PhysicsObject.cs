@@ -18,6 +18,16 @@ public class PhysicsObject : MonoBehaviour
 
     private float maxSpeed = 50;
 
+    /// <summary>
+    /// Gets the object's velocity
+    /// </summary>
+    public Vector3 Velocity { get { return velocity; } }
+
+    /// <summary>
+    /// Gets the object's angular velocity
+    /// </summary>
+    public float AngularVelocity { get { return angularVelocity; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,14 +137,14 @@ public class PhysicsObject : MonoBehaviour
                 }
 
                 // apply a force equal to the amount of force required to stop this object
-                otherObject.physics.ApplyForce((otherObject.Position - position).normalized * (velocity - otherObject.physics.velocity).magnitude * objectInfo.Mass);
+                otherObject.physics.ApplyForce((otherObject.Position - position).normalized * (velocity - otherObject.physics.Velocity).magnitude * objectInfo.Mass);
 
                 // get the tangent vector to the contact point (normalized)
                 Vector3 differenceVector = otherObject.Position - position;
                 Vector3 TangentVector = new Vector3(differenceVector.y, -differenceVector.x).normalized;
 
                 // apply force to the other object equal to the angulr momentum 
-                otherObject.physics.ApplyForce(TangentVector * angularVelocity * objectInfo.Radius);
+                otherObject.physics.ApplyForce(-TangentVector * angularVelocity * objectInfo.Radius);
 
                 // you do more damage to a spinner if you're going faster
                 otherObject.physics.SlowSpin(velocity.magnitude / 5);

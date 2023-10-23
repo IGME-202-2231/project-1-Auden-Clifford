@@ -9,7 +9,8 @@ public class InputController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // when the player is instantiated, it should add itself to the player field
+        GameManager.Instance.Player = gameObject;
     }
 
     [SerializeField] private PhysicsObject playerControlledObject;
