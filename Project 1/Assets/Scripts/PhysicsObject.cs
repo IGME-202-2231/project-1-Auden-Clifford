@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
@@ -120,7 +121,15 @@ public class PhysicsObject : MonoBehaviour
                 }
 
                 // apply a force equal to the amount of force required to stop this object
-                otherObject.physics.ApplyForce((otherObject.Position - position).normalized * velocity.magnitude * objectInfo.Mass);
+                otherObject.physics.ApplyForce((otherObject.Position - position).normalized * (velocity - otherObject.physics.velocity).magnitude * objectInfo.Mass);
+
+
+                // get the tangent vector to the contact point (normalized)
+                Vector3 differenceVector = otherObject.Position - position;
+                Vector3 TangentVector = new Vector3(differenceVector.y, -differenceVector.x).normalized;
+
+                // apply force to the other object equal to the angulr momentum 
+                otherObject.physics.ApplyForce(TangentVector * angularVelocity * objectInfo.Radius);
             }
         }
 
