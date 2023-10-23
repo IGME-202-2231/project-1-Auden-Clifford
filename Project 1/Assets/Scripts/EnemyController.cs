@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] float accelSpeed;
     [SerializeField] GameObject player;
     [SerializeField] PhysicsObject physicsMovement;
 
@@ -16,6 +17,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * 15);
+        physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
     }
 }

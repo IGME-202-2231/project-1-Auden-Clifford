@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d3688624afae7428d7b139b465f35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accelSpeed: 20
   player: {fileID: 0}
   physicsMovement: {fileID: 3729130997991142718}
 --- !u!114 &3729130997991142718
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 375221785618919771}
   sprite: {fileID: 3370165315153456810}
-  angularVelocity: 100
+  angularVelocity: 800
 --- !u!1 &3370165315153456810
 GameObject:
   m_ObjectHideFlags: 0

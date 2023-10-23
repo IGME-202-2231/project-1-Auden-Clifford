@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlledObject: {fileID: 8448910542681071160}
-  accelSpeed: 15
+  accelSpeed: 20
   playerWeapon: {fileID: 5897064906358189134}
 --- !u!114 &5897064906358189134
 MonoBehaviour:
@@ -266,7 +266,7 @@ MonoBehaviour:
   radius: 1.21
   sprite: {fileID: 5661870326000753313}
   physics: {fileID: 8448910542681071160}
-  type: 0
+  type: 1
 --- !u!114 &8448910542681071160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,4 +281,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 7317485018922105422}
   sprite: {fileID: 1610259643038018881}
-  angularVelocity: 100
+  angularVelocity: 800

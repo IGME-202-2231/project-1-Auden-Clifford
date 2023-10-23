@@ -16,7 +16,7 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] private float angularVelocity;
     private float totalRotation = 0;
 
-    private float maxSpeed = 100;
+    private float maxSpeed = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +60,12 @@ public class PhysicsObject : MonoBehaviour
 
         // zero out acceleration
         acceleration = Vector3.zero;
+
+        // if the spinner stops spinning, destroy it
+        if(angularVelocity <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -123,13 +129,16 @@ public class PhysicsObject : MonoBehaviour
                 // apply a force equal to the amount of force required to stop this object
                 otherObject.physics.ApplyForce((otherObject.Position - position).normalized * (velocity - otherObject.physics.velocity).magnitude * objectInfo.Mass);
 
-
                 // get the tangent vector to the contact point (normalized)
                 Vector3 differenceVector = otherObject.Position - position;
                 Vector3 TangentVector = new Vector3(differenceVector.y, -differenceVector.x).normalized;
 
                 // apply force to the other object equal to the angulr momentum 
                 otherObject.physics.ApplyForce(TangentVector * angularVelocity * objectInfo.Radius);
+
+                // you do more damage to a spinner if you're going faster
+                otherObject.physics.SlowSpin(velocity.magnitude / 5);
+                
             }
         }
 
