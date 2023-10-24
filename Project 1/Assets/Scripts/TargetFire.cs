@@ -5,18 +5,23 @@ using UnityEngine;
 public class TargetFire : MonoBehaviour
 {
     [SerializeField] private GameObject ammunition;
+    private float fireTimer;
+    [SerializeField] private float fireTime = 2;
+
+    public bool isFiring;
+
     //[SerializeField] private MovementController movementController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fireTimer = fireTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     internal void Fire(Vector3 direction)

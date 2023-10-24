@@ -10,12 +10,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] int score;
     [SerializeField] RadialFire weapon;
     [SerializeField] float detectionRadius;
+    [SerializeField] private GameObject markerPrefab;
+
+    private GameObject marker;
+
+    /// <summary>
+    /// Gets this enemy's marker object
+    /// </summary>
+    public GameObject Marker { get { return marker; } }
 
     // Start is called before the first frame update
     void Start()
     {
         // when an enemy is instantiated, it should add itself to the Game Manager
         //GameManager.Instance.Enemies.Add(gameObject);
+
+        marker = Instantiate(markerPrefab);
 
         // get a reference to the player
         player = GameManager.Instance.Player;
@@ -46,6 +56,7 @@ public class EnemyController : MonoBehaviour
         if(GameManager.Instance != null)
         {
             GameManager.Instance.Enemies.Remove(gameObject);
+            Destroy(marker);
 
             if(GameManager.Instance.currentState == GameState.Gameplay)
             {

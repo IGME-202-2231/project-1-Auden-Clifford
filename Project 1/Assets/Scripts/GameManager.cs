@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyStandardPrefab;
     [SerializeField] private GameObject enemyShooterPrefab;
+    
 
     private GameObject player;
     private List<GameObject> enemies = new List<GameObject>();
@@ -36,6 +37,8 @@ public class GameManager : Singleton<GameManager>
 
     private int round = 1;
     private int score = 0;
+
+    private float markerRadius = 4;
 
     /// <summary>
     /// Gets or sets the game object that the player controls
@@ -77,6 +80,8 @@ public class GameManager : Singleton<GameManager>
                 scoreDisplay.text = "Score: " + score;
                 roundDisplay.text = "Round: " + round;
                 EnemiesDisplay.text = "Enemies: " + enemies.Count;
+
+                DrawMarkers();
 
                 // spawn new enemies if the player destroyed all current ones
                 if(enemies.Count == 0)
@@ -218,5 +223,13 @@ public class GameManager : Singleton<GameManager>
         Mathf.Sin(2.0f * Mathf.PI * val2);
 
         return mean + stdDev * gaussValue;
+    }
+
+    private void DrawMarkers()
+    {
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyController>().Marker.transform.position = player.transform.position + (enemy.transform.position - player.transform.position).normalized * markerRadius;
+        }
     }
 }

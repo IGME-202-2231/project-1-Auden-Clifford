@@ -32,7 +32,7 @@ public class InputController : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {
         // only fire when the button is first pressed
-        if(context.started)
+        if (context.started)
         {
             playerWeapon.Fire(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position);
         }

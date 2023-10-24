@@ -68,6 +68,8 @@ MonoBehaviour:
   score: 100
   weapon: {fileID: 0}
   detectionRadius: 10
+  markerPrefab: {fileID: 6873647728514003776, guid: 2431b78d1d1389642a1b7709baf65133, type: 3}
+  marker: {fileID: 0}
 --- !u!114 &3729130997991142718
 MonoBehaviour:
   m_ObjectHideFlags: 0
