@@ -18,7 +18,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
+        if(GameManager.Instance.currentState == GameState.Gameplay)
+        {
+            physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
+        }
     }
 
     private void OnDestroy()

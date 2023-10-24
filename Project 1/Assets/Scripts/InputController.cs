@@ -42,6 +42,18 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerControlledObject.ApplyForce(direction * accelSpeed);
+        if(GameManager.Instance.currentState == GameState.Gameplay)
+        {
+            playerControlledObject.ApplyForce(direction * accelSpeed);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            // when the player is destroyed (they die) set the game state to GameOver\
+            GameManager.Instance.currentState = GameState.GameOver;
+        }
     }
 }

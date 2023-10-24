@@ -17,27 +17,29 @@ public class CollisionManager : Singleton<CollisionManager>
     // Update is called once per frame
     void Update()
     {
-        // loop through each item
-        foreach(ObjectInfo collidable in gameObjects)
+        if(GameManager.Instance.currentState == GameState.Gameplay)
         {
-            // before calculating new collisions, clear the old ones
-            collidable.collisions.Clear();
-
-            // check each item against each other item
-            foreach(ObjectInfo otherCollidable in gameObjects)
+            // loop through each item
+            foreach (ObjectInfo collidable in gameObjects)
             {
-                // make sure objects are not checked against themselves
-                if(collidable != otherCollidable)
+                // before calculating new collisions, clear the old ones
+                collidable.collisions.Clear();
+
+                // check each item against each other item
+                foreach (ObjectInfo otherCollidable in gameObjects)
                 {
-                    if (Vector2.Distance(collidable.Position, otherCollidable.Position) <= collidable.Radius + otherCollidable.Radius)
+                    // make sure objects are not checked against themselves
+                    if (collidable != otherCollidable)
                     {
-                        // if they're colliding, add the collision to the object's collisions list
-                        collidable.collisions.Add(otherCollidable);
+                        if (Vector2.Distance(collidable.Position, otherCollidable.Position) <= collidable.Radius + otherCollidable.Radius)
+                        {
+                            // if they're colliding, add the collision to the object's collisions list
+                            collidable.collisions.Add(otherCollidable);
+                        }
                     }
                 }
             }
         }
-
         //print(gameObjects.Count);
     }
 }

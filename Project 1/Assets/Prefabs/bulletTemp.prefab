@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 1499253194717466995}
   direction: {x: 0, y: 0, z: 0}
-  damage: 5
+  damage: 50
   lifespan: 10
 --- !u!114 &1499253194717466995
 MonoBehaviour:

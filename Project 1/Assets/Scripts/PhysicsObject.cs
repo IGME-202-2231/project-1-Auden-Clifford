@@ -38,43 +38,45 @@ public class PhysicsObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        ResolveCollisions(objectInfo.collisions);
-
-        // apply friction from ground
-        ApplyFriction();
-
-        // calculate velocity for this frame
-        velocity += acceleration * Time.deltaTime;
-
-        // validate the speed
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-
-        //print(velocity.magnitude);
-        //print("calcPos: " + position.x + ", " + position.y + "\n actualPos: " + transform.position.x + ", " + transform.position.y);
-
-        // calculate the postion
-        position += velocity * Time.deltaTime;
-
-        // calculate the rotation
-        totalRotation += angularVelocity * Time.deltaTime;
-        
-        // grab direction from velocity
-        direction = velocity.normalized;
-
-        // set the object's postion to calculated position
-        transform.position = position;
-
-        // rotate the sprite
-        sprite.transform.rotation = Quaternion.Euler(0, 0, totalRotation);
-
-        // zero out acceleration
-        acceleration = Vector3.zero;
-
-        // if the spinner stops spinning, destroy it
-        if(angularVelocity <= 0)
+        if(GameManager.Instance.currentState == GameState.Gameplay)
         {
-            Destroy(gameObject);
+            ResolveCollisions(objectInfo.collisions);
+
+            // apply friction from ground
+            ApplyFriction();
+
+            // calculate velocity for this frame
+            velocity += acceleration * Time.deltaTime;
+
+            // validate the speed
+            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+
+            //print(velocity.magnitude);
+            //print("calcPos: " + position.x + ", " + position.y + "\n actualPos: " + transform.position.x + ", " + transform.position.y);
+
+            // calculate the postion
+            position += velocity * Time.deltaTime;
+
+            // calculate the rotation
+            totalRotation += angularVelocity * Time.deltaTime;
+
+            // grab direction from velocity
+            direction = velocity.normalized;
+
+            // set the object's postion to calculated position
+            transform.position = position;
+
+            // rotate the sprite
+            sprite.transform.rotation = Quaternion.Euler(0, 0, totalRotation);
+
+            // zero out acceleration
+            acceleration = Vector3.zero;
+
+            // if the spinner stops spinning, destroy it
+            if (angularVelocity <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

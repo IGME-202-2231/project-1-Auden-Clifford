@@ -45,25 +45,28 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ResolveCollisions(objectInfo.collisions);
-
-        //velocity = direction * speed * Time.deltaTime;
-
-        // add velocity to position
-        position += direction * speed * Time.deltaTime;
-
-        transform.position = position;
-
-        // change rotation to face direction
-        //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
-
-        // count down the seconds since the object was created
-        lifespan -= Time.deltaTime;
-
-        // remove the object when it's lifespan ends
-        if(lifespan < 0)
+        if(GameManager.Instance.currentState == GameState.Gameplay)
         {
-            Destroy(gameObject);
+            ResolveCollisions(objectInfo.collisions);
+
+            //velocity = direction * speed * Time.deltaTime;
+
+            // add velocity to position
+            position += direction * speed * Time.deltaTime;
+
+            transform.position = position;
+
+            // change rotation to face direction
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+
+            // count down the seconds since the object was created
+            lifespan -= Time.deltaTime;
+
+            // remove the object when it's lifespan ends
+            if (lifespan < 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlledObject: {fileID: 8448910542681071160}
-  accelSpeed: 20
+  accelSpeed: 50
   playerWeapon: {fileID: 5897064906358189134}
 --- !u!114 &5897064906358189134
 MonoBehaviour:
