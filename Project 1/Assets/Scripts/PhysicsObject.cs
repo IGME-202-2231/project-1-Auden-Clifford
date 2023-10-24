@@ -78,6 +78,8 @@ public class PhysicsObject : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        sprite.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     /// <summary>
@@ -96,8 +98,11 @@ public class PhysicsObject : MonoBehaviour
     public void SlowSpin(float amount)
     {
         angularVelocity -= amount;
-        print("oh no, I got hit!");
-        Gizmos.color = Color.red;
+        //print("oh no, I got hit!");
+        sprite.GetComponent<SpriteRenderer>().color = Color.red;
+        //Gizmos.color = Color.red;
+
+        
     }
 
     /// <summary>
@@ -148,9 +153,8 @@ public class PhysicsObject : MonoBehaviour
                 // apply force to the other object equal to the angulr momentum 
                 otherObject.physics.ApplyForce(-TangentVector * angularVelocity * objectInfo.Radius);
 
-                // you do more damage to a spinner if you're going faster
-                otherObject.physics.SlowSpin(velocity.magnitude / 5);
-                
+                // you do more damage to a spinner based on momentum
+                otherObject.physics.SlowSpin(velocity.magnitude * objectInfo.Mass / 20);
             }
         }
 

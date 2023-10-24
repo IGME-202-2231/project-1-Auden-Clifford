@@ -131,12 +131,6 @@ public class GameManager : Singleton<GameManager>
         score = 0;
         round = 1;
 
-        // clear any lefover enemies
-        foreach(GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
-
         // spawn new ones
         SpawnEnemies(round);
     }
@@ -147,11 +141,22 @@ public class GameManager : Singleton<GameManager>
         menuPanel.gameObject.SetActive(false);
         gameUIPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(true);
+
+        // clear any lefover enemies
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
     }
 
     private void SpawnEnemies(int baseNumber)
     {
         Instantiate(enemyShooterPrefab, new Vector3(10, 10, 0), Quaternion.identity);
         Instantiate(enemyStandardPrefab, new Vector3(-10, -10, 0), Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+
     }
 }

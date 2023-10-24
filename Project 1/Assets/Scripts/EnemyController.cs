@@ -26,11 +26,11 @@ public class EnemyController : MonoBehaviour
     {
         if(GameManager.Instance.currentState == GameState.Gameplay)
         {
-            // only move towards the player or shoot if they are within the detection radius
+            physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
+
+            // only shoot if the player is within the detection radius
             if (Vector3.Distance(player.transform.position, transform.position) < detectionRadius)
             {
-                physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
-
                 // if this enemy has the ability to fire a weapon, do so
                 if (weapon != null)
                 {
@@ -46,9 +46,10 @@ public class EnemyController : MonoBehaviour
         if(GameManager.Instance != null)
         {
             GameManager.Instance.Enemies.Remove(gameObject);
-            GameManager.Instance.Score += score;
-
-            // when an enemy dies, it should give the player more anglular velocity
+            if(GameManager.Instance.currentState == GameState.Gameplay)
+            {
+                GameManager.Instance.Score += score;
+            }
         }
     }
 
