@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.21
-  sprite: {fileID: 8507001672195922250}
   physics: {fileID: 3729130997991142718}
   type: 1
 --- !u!114 &6188318905891369059
@@ -67,9 +66,8 @@ MonoBehaviour:
   physicsMovement: {fileID: 3729130997991142718}
   score: 100
   weapon: {fileID: 0}
-  detectionRadius: 10
+  detectionRadius: 0
   markerPrefab: {fileID: 6873647728514003776, guid: 2431b78d1d1389642a1b7709baf65133, type: 3}
-  marker: {fileID: 0}
 --- !u!114 &3729130997991142718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 375221785618919771}
   sprite: {fileID: 3370165315153456810}
-  angularVelocity: 800
+  angularVelocity: 750
 --- !u!1 &3370165315153456810
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,6 +40,8 @@ Unlike many Shmup games, this game will have physics-based interactions between 
 
 **Shooter Enemy** (purple band) - These enemies will also approach the player's position, however, they are large and slow and tend to hang back out of the action. Instead of being a melee threat, when they get close to the player they shoot a fan of bullets out in a circle, causing chaos for friend and foe alike. Only one shooter enemy will spawn for every 5 standard enemies, so you could see one during your second round, or not until your 5th.
 
+**Fast Enemy** (green band) - These enemies less aproach the player as careen toward them. Fast, small, and packing a massive punch, the fast enemies are capable of shredding a player's healthbar to nothing within 3 collisions (I checked). These enemies are rare, only 1 will spawn for every 10 standard enemies spawned which makes them the perfect golden snitch. Take it down and you're rewarded with 1000 points and a hefty boost to your angular velocity!
+
 ## Sources
 
 -   All sprites are original work

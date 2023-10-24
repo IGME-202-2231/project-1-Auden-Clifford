@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.6
-  sprite: {fileID: 1690247703484140131}
   physics: {fileID: 1757302530801714094}
   type: 1
 --- !u!114 &1757302530801714094
@@ -84,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 2790539670888646873}
   sprite: {fileID: 5746378555850472835}
-  angularVelocity: 800
+  angularVelocity: 900
 --- !u!114 &3971673081823827834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammunition: {fileID: 5643348901217638522, guid: e8cee8452a6c3fb4fbe5b75d7df5c50e, type: 3}
-  fireTime: 2
+  fireTime: 1
 --- !u!1001 &411633362037505626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,11 +159,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 7243324766535440047, guid: 2b495f0384a769c4690c86440c791cbf, type: 3}
---- !u!212 &1690247703484140131 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7871556540511652807, guid: 2b495f0384a769c4690c86440c791cbf, type: 3}
-  m_PrefabInstance: {fileID: 411633362037505626}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5746378555850472835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3888481672020999207, guid: 2b495f0384a769c4690c86440c791cbf, type: 3}

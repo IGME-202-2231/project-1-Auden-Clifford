@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyStandardPrefab;
     [SerializeField] private GameObject enemyShooterPrefab;
+    [SerializeField] private GameObject enemyFastPrefab;
     
     private GameObject player;
     private List<GameObject> enemies = new List<GameObject>();
@@ -223,6 +224,17 @@ public class GameManager : Singleton<GameManager>
         {
             enemies.Add(Instantiate(
                 enemyShooterPrefab,
+                new Vector3(
+                    Gaussian(player.transform.position.x, 20),
+                    Gaussian(player.transform.position.y, 20),
+                    0), Quaternion.identity));
+        }
+
+        // for every 10 normal enemies that spawn, 1 fast enemy will spawn
+        for (int i = 0; i < numEnemies / 10; i++)
+        {
+            enemies.Add(Instantiate(
+                enemyFastPrefab,
                 new Vector3(
                     Gaussian(player.transform.position.x, 20),
                     Gaussian(player.transform.position.y, 20),
