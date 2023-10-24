@@ -34,7 +34,7 @@ public class InputController : MonoBehaviour
         // only fire when the button is first pressed
         if (context.started)
         {
-            playerWeapon.Fire(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position);
+            playerWeapon.Fire();
         }
     }
 
@@ -45,6 +45,10 @@ public class InputController : MonoBehaviour
         if(GameManager.Instance.currentState == GameState.Gameplay)
         {
             playerControlledObject.ApplyForce(direction * accelSpeed);
+
+            playerWeapon.Direction = new Vector3(
+                (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position).x, 
+                (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position).y, 0);
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,14 +13,16 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    // only needed in game scene
     [SerializeField] private TextMesh playerRotation;
     [SerializeField] private TextMesh playerSpeed;
     [SerializeField] private TextMesh scoreDisplay;
     [SerializeField] private TextMesh roundDisplay;
     [SerializeField] private TextMesh EnemiesDisplay;
 
-    // only needed in menu scene
+    [SerializeField] private TextMeshPro FinalTime;
+    [SerializeField] private TextMeshPro FinalScore;
+    [SerializeField] private TextMeshPro FinalRound;
+
     [SerializeField] private CanvasRenderer menuPanel;
     [SerializeField] private CanvasRenderer helpPanel;
     [SerializeField] private CanvasRenderer gameUIPanel;
@@ -37,6 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     private int round = 1;
     private int score = 0;
+    private float time = 0;
 
     private float markerRadius = 4;
 
@@ -70,14 +74,27 @@ public class GameManager : Singleton<GameManager>
         switch(currentState)
         {
             case GameState.Menu:
-
                 break;
 
             case GameState.Gameplay:
                 // display player info
 
                 // display rotation at different colors based whn it gets low
-                playerRotation.text = ((int)player.GetComponent<PhysicsObject>().AngularVelocity).ToString();
+                float rotation = player.GetComponent<PhysicsObject>().AngularVelocity;
+                if (rotation > 300)
+                {
+                    playerRotation.color = Color.white;
+                }
+                else if(rotation > 100)
+                {
+                    playerRotation.color = Color.yellow;
+                }
+                else
+                {
+                    playerRotation.color = Color.red;
+                }
+
+                playerRotation.text = ((int)rotation).ToString();
                 playerSpeed.text = ((int)player.GetComponent<PhysicsObject>().Velocity.magnitude).ToString();
                 scoreDisplay.text = score.ToString();
                 roundDisplay.text = round.ToString();
@@ -93,10 +110,15 @@ public class GameManager : Singleton<GameManager>
                     SpawnEnemies(round);
                 }
 
+                time += Time.deltaTime;
+
                 DrawMarkers();
                 break;
 
             case GameState.GameOver:
+                FinalRound.text = "Round: " + round;
+                FinalScore.text = "Score: " + score;
+                FinalTime.text = "Time: " + (int)time / 60 + ":" + (int)time % 60;
                 break;
         }
         
@@ -144,6 +166,7 @@ public class GameManager : Singleton<GameManager>
         // reset game values
         score = 0;
         round = 1;
+        time = 0;
 
         // spawn new enemies
         SpawnEnemies(round);
