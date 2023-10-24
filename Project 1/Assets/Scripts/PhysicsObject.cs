@@ -94,7 +94,7 @@ public class PhysicsObject : MonoBehaviour
     /// <summary>
     /// Slows doen the spinner's rotational velocity by some amount
     /// </summary>
-    /// <param name="amount">Amount deducted from rotational velodity</param>
+    /// <param name="amount">Amount deducted from rotational velocity</param>
     public void SlowSpin(float amount)
     {
         angularVelocity -= amount;
@@ -103,6 +103,16 @@ public class PhysicsObject : MonoBehaviour
         //Gizmos.color = Color.red;
 
         
+    }
+
+    /// <summary>
+    /// Speeds up the spinner's rotational velocity by some amount
+    /// </summary>
+    /// <param name="amount">Amount added to rotational velocity</param>
+    public void SpeedUpSpin(float amount)
+    {
+        angularVelocity += amount;
+        sprite.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
     /// <summary>

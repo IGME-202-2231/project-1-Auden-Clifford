@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         // when an enemy is instantiated, it should add itself to the Game Manager
-        GameManager.Instance.Enemies.Add(gameObject);
+        //GameManager.Instance.Enemies.Add(gameObject);
 
         // get a reference to the player
         player = GameManager.Instance.Player;
@@ -46,10 +46,17 @@ public class EnemyController : MonoBehaviour
         if(GameManager.Instance != null)
         {
             GameManager.Instance.Enemies.Remove(gameObject);
+
             if(GameManager.Instance.currentState == GameState.Gameplay)
             {
                 GameManager.Instance.Score += score;
             }
+        }
+
+        if(player != null) 
+        {
+            // the player gains rotational velocity equal to half this enemy's score
+            player.GetComponent<PhysicsObject>().SpeedUpSpin(score / 2);
         }
     }
 

@@ -81,6 +81,9 @@ public class GameManager : Singleton<GameManager>
                 // spawn new enemies if the player destroyed all current ones
                 if(enemies.Count == 0)
                 {
+                    // give the player an extra speed boost for finishing the round
+                    player.GetComponent<PhysicsObject>().SpeedUpSpin(round * 10);
+
                     round++;
                     SpawnEnemies(round);
                 }
@@ -109,6 +112,9 @@ public class GameManager : Singleton<GameManager>
         helpPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// This function is called if the player quits beck to the menu screen
+    /// </summary>
     public void QuitToMenu()
     {
         currentState = GameState.Menu;
@@ -117,9 +123,11 @@ public class GameManager : Singleton<GameManager>
         gameOverPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// This function is called whenever the player starts a new game
+    /// </summary>
     public void StartGame()
     {
-        currentState = GameState.Gameplay;
         menuPanel.gameObject.SetActive(false);
         gameUIPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
@@ -131,10 +139,15 @@ public class GameManager : Singleton<GameManager>
         score = 0;
         round = 1;
 
-        // spawn new ones
+        // spawn new enemies
         SpawnEnemies(round);
+
+        currentState = GameState.Gameplay;
     }
 
+    /// <summary>
+    /// This function is called when the player is destroyed, signals the program to end the game
+    /// </summary>
     public void GameOver()
     {
         currentState = GameState.GameOver;
@@ -149,14 +162,61 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Spawns a random number of shooter and standard enemies in a gaussian distribution around the player
+    /// </summary>
+    /// <param name="baseNumber">minimum number of enemies to spawn</param>
     private void SpawnEnemies(int baseNumber)
     {
+        int numEnemies = Random.Range(baseNumber, baseNumber + 3);
+
+        for(int i = 0; i < numEnemies; i++)
+        {
+            enemies.Add(Instantiate(
+                enemyStandardPrefab,
+                new Vector3(
+                    Gaussian(player.transform.position.x, 20),
+                    Gaussian(player.transform.position.y, 20),
+                    0), Quaternion.identity));
+        }
+
+        // for every 5 normal enemies that spawn, 1 shooter enemy will spawn
+        for (int i = 0; i < numEnemies / 5; i++) 
+        {
+            enemies.Add(Instantiate(
+                enemyShooterPrefab,
+                new Vector3(
+                    Gaussian(player.transform.position.x, 20),
+                    Gaussian(player.transform.position.y, 20),
+                    0), Quaternion.identity));
+        }
+
+        /*
         Instantiate(enemyShooterPrefab, new Vector3(10, 10, 0), Quaternion.identity);
         Instantiate(enemyStandardPrefab, new Vector3(-10, -10, 0), Quaternion.identity);
+        */
     }
 
     public void Damage()
     {
 
+    }
+
+    /// <summary>
+    /// Get a random number with gaussian distribution
+    /// </summary>
+    /// <param name="mean">the mean value</param>
+    /// <param name="stdDev">the standard deviation from the mean</param>
+    /// <returns>a random float with gaussian distribution</returns>
+    private float Gaussian(float mean, float stdDev)
+    {
+        float val1 = Random.Range(0f, 1f);
+        float val2 = Random.Range(0f, 1f);
+
+        float gaussValue =
+        Mathf.Sqrt(-2.0f * Mathf.Log(val1)) *
+        Mathf.Sin(2.0f * Mathf.PI * val2);
+
+        return mean + stdDev * gaussValue;
     }
 }
