@@ -22,9 +22,6 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // when an enemy is instantiated, it should add itself to the Game Manager
-        //GameManager.Instance.Enemies.Add(gameObject);
-
         marker = Instantiate(markerPrefab);
 
         // get a reference to the player

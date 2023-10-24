@@ -6,29 +6,26 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        // when the player is instantiated, it should add itself to the player field
-        //GameManager.Instance.Player = gameObject;
-    }
-
     [SerializeField] private PhysicsObject playerControlledObject;
     [SerializeField] private float accelSpeed;
-    private Vector2 direction;
-    //[SerializeField] private MovementController playerControlledObject;
     [SerializeField] private TargetFire playerWeapon;
-    
+
+    private Vector2 direction;
+
     // The method that gets called to handle any player movement input
+    /// <summary>
+    /// Updates the direction of the player's movement when the directional inputs change
+    /// </summary>
+    /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
     {
-        // Get the latest value for the input from the Input 
-        // System and send that new direction to the Vehicle class
-        //playerControlledObject.Direction = context.ReadValue<Vector2>();
-
         direction = context.ReadValue<Vector2>();
     }
 
+    /// <summary>
+    /// Fires a bullet whn the player performs the fire action
+    /// </summary>
+    /// <param name="context"></param>
     public void OnFire(InputAction.CallbackContext context)
     {
         // only fire when the button is first pressed

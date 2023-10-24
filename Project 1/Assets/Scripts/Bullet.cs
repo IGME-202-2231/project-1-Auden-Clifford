@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
 
     private Vector3 position = Vector3.zero;
     [SerializeField] private Vector3 direction = Vector3.zero;
-    //private Vector3 velocity = Vector3.zero;
 
     private float speed = 20;
     [SerializeField] private float damage;
@@ -49,15 +48,11 @@ public class Bullet : MonoBehaviour
         {
             ResolveCollisions(objectInfo.collisions);
 
-            //velocity = direction * speed * Time.deltaTime;
-
-            // add velocity to position
+            // add caclulated velocity to position
             position += direction * speed * Time.deltaTime;
 
+            // update actual position to calculated position
             transform.position = position;
-
-            // change rotation to face direction
-            //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
 
             // count down the seconds since the object was created
             lifespan -= Time.deltaTime;
@@ -71,7 +66,7 @@ public class Bullet : MonoBehaviour
     }
 
     /// <summary>
-    /// Resolves all collisions dretected this frame; ignores the originator and dissapears when it hits something else
+    /// Resolves all collisions dretected this frame; ignores the originator and other bullets and dissapears when it hits something else
     /// </summary>
     /// <param name="collisions">A list containing all the collisions detected this frame</param>
     private void ResolveCollisions(List<ObjectInfo> collisions)

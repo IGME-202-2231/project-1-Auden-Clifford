@@ -9,7 +9,6 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] GameObject sprite;
 
     private Vector3 position;
-    private Vector3 direction;
     private Vector3 velocity;
     private Vector3 acceleration;
 
@@ -17,6 +16,7 @@ public class PhysicsObject : MonoBehaviour
     private float totalRotation = 0;
 
     private float maxSpeed = 50;
+    private float damageTimer = 0;
 
     /// <summary>
     /// Gets the object's velocity
@@ -38,6 +38,7 @@ public class PhysicsObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // physics object should only update during the game state
         if(GameManager.Instance.currentState == GameState.Gameplay)
         {
             ResolveCollisions(objectInfo.collisions);
@@ -51,17 +52,11 @@ public class PhysicsObject : MonoBehaviour
             // validate the speed
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
-            //print(velocity.magnitude);
-            //print("calcPos: " + position.x + ", " + position.y + "\n actualPos: " + transform.position.x + ", " + transform.position.y);
-
             // calculate the postion
             position += velocity * Time.deltaTime;
 
             // calculate the rotation
             totalRotation += angularVelocity * Time.deltaTime;
-
-            // grab direction from velocity
-            direction = velocity.normalized;
 
             // set the object's postion to calculated position
             transform.position = position;
@@ -72,14 +67,23 @@ public class PhysicsObject : MonoBehaviour
             // zero out acceleration
             acceleration = Vector3.zero;
 
+            // display the sprite red whenever damage is taken
+            if(damageTimer > 0)
+            {
+                sprite.GetComponent<SpriteRenderer>().color = Color.red;
+                damageTimer -= Time.deltaTime;
+            }
+            else
+            {
+                sprite.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+
             // if the spinner stops spinning, destroy it
             if (angularVelocity <= 0)
             {
                 Destroy(gameObject);
             }
         }
-
-        sprite.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     /// <summary>
@@ -92,17 +96,16 @@ public class PhysicsObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Slows doen the spinner's rotational velocity by some amount
+    /// Slows down the spinner's rotational velocity by some amount
     /// </summary>
     /// <param name="amount">Amount deducted from rotational velocity</param>
     public void SlowSpin(float amount)
     {
         angularVelocity -= amount;
-        //print("oh no, I got hit!");
         sprite.GetComponent<SpriteRenderer>().color = Color.red;
-        //Gizmos.color = Color.red;
 
-        
+        //when angular velocity slows down the "hurt" anumation should play
+        damageTimer = 0.15f;
     }
 
     /// <summary>
@@ -127,7 +130,7 @@ public class PhysicsObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Resolves all collisions detected this frame by simulating rigidbody physics collisions
+    /// Resolves all collisions detected this frame by (roughly) simulating physics collisions
     /// </summary>
     /// <param name="collisions">List of objects being collided with</param>
     private void ResolveCollisions(List<ObjectInfo> collisions)
@@ -167,8 +170,6 @@ public class PhysicsObject : MonoBehaviour
                 otherObject.physics.SlowSpin(velocity.magnitude * objectInfo.Mass / 20);
             }
         }
-
-        //print(collisions.Count);
     }
 
     private void OnDrawGizmos()

@@ -13,31 +13,36 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    // in-game UI
     [SerializeField] private TextMesh playerRotation;
     [SerializeField] private TextMesh playerSpeed;
     [SerializeField] private TextMesh scoreDisplay;
     [SerializeField] private TextMesh roundDisplay;
     [SerializeField] private TextMesh EnemiesDisplay;
 
+    // death screen UI
     [SerializeField] private TextMeshPro FinalTime;
     [SerializeField] private TextMeshPro FinalScore;
     [SerializeField] private TextMeshPro FinalRound;
 
+    // UI containters
     [SerializeField] private CanvasRenderer menuPanel;
     [SerializeField] private CanvasRenderer helpPanel;
     [SerializeField] private CanvasRenderer gameUIPanel;
     [SerializeField] private CanvasRenderer gameOverPanel;
 
+    // enemies and player prefabs
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyStandardPrefab;
     [SerializeField] private GameObject enemyShooterPrefab;
     
-
     private GameObject player;
     private List<GameObject> enemies = new List<GameObject>();
 
+    // keep track of the game's current state
     public GameState currentState = GameState.Menu;
 
+    // set initial pre-game values
     private int round = 1;
     private int score = 0;
     private float time = 0;
@@ -55,7 +60,7 @@ public class GameManager : Singleton<GameManager>
     public List<GameObject> Enemies { get { return enemies; } }
 
     /// <summary>
-    /// Gets or sets the score this game
+    /// Gets or sets the player's score this game
     /// </summary>
     public int Score { get { return score; } set { score = value; } }
 
@@ -77,9 +82,9 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case GameState.Gameplay:
-                // display player info
+                // In-Game UI
 
-                // display rotation at different colors based whn it gets low
+                // display rotation speed at different colors based on how low it is
                 float rotation = player.GetComponent<PhysicsObject>().AngularVelocity;
                 if (rotation > 300)
                 {
@@ -94,13 +99,14 @@ public class GameManager : Singleton<GameManager>
                     playerRotation.color = Color.red;
                 }
 
-                playerRotation.text = ((int)rotation).ToString();
+                // display the values in the correct slots in the UI
+                playerRotation.text = ((int)rotation / 6).ToString(); // devide by 6 to convert to rpm
                 playerSpeed.text = ((int)player.GetComponent<PhysicsObject>().Velocity.magnitude).ToString();
                 scoreDisplay.text = score.ToString();
                 roundDisplay.text = round.ToString();
                 EnemiesDisplay.text = enemies.Count.ToString();
 
-                // spawn new enemies if the player destroyed all current ones
+                // start a new round when all enemies are defeated
                 if(enemies.Count == 0)
                 {
                     // give the player an extra speed boost for finishing the round
@@ -110,12 +116,15 @@ public class GameManager : Singleton<GameManager>
                     SpawnEnemies(round);
                 }
 
+                // keep track of the time this game has lasted
                 time += Time.deltaTime;
 
+                // update the positions of the objects marking enemy locations
                 DrawMarkers();
                 break;
 
             case GameState.GameOver:
+                //display the final results of the game
                 FinalRound.text = "Round: " + round;
                 FinalScore.text = "Score: " + score;
                 FinalTime.text = "Time: " + (int)time / 60 + ":" + (int)time % 60;
@@ -141,7 +150,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
-    /// This function is called if the player quits beck to the menu screen
+    /// This function is called if the player quits back to the menu screen
     /// </summary>
     public void QuitToMenu()
     {
@@ -219,16 +228,6 @@ public class GameManager : Singleton<GameManager>
                     Gaussian(player.transform.position.y, 20),
                     0), Quaternion.identity));
         }
-
-        /*
-        Instantiate(enemyShooterPrefab, new Vector3(10, 10, 0), Quaternion.identity);
-        Instantiate(enemyStandardPrefab, new Vector3(-10, -10, 0), Quaternion.identity);
-        */
-    }
-
-    public void Damage()
-    {
-
     }
 
     /// <summary>
@@ -249,6 +248,9 @@ public class GameManager : Singleton<GameManager>
         return mean + stdDev * gaussValue;
     }
 
+    /// <summary>
+    /// Draws markers around the player that indicate the direction of enemies
+    /// </summary>
     private void DrawMarkers()
     {
         foreach(GameObject enemy in enemies)

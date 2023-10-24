@@ -40,6 +40,5 @@ public class CollisionManager : Singleton<CollisionManager>
                 }
             }
         }
-        //print(gameObjects.Count);
     }
 }

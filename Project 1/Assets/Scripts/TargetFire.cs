@@ -5,7 +5,6 @@ using UnityEngine;
 public class TargetFire : MonoBehaviour
 {
     [SerializeField] private GameObject ammunition;
-    [SerializeField] private float fireTime = 2;
     [SerializeField] private GameObject barrelSprite;
 
     private Vector3 direction;
@@ -19,20 +18,16 @@ public class TargetFire : MonoBehaviour
         set { direction = value.normalized; }
     }
 
-    //[SerializeField] private MovementController movementController;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
+        // animate the gun barrel
         barrelSprite.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
     }
 
+    /// <summary>
+    /// Fires one bullet each time the function is called
+    /// </summary>
     internal void Fire()
     {
         GameObject bullet = Instantiate(ammunition, transform.position, Quaternion.identity);

@@ -11,22 +11,13 @@ public enum ObjectType
 public class ObjectInfo : MonoBehaviour
 {
     [SerializeField] private float radius;
-    [SerializeField] private SpriteRenderer sprite;
+    //[SerializeField] private SpriteRenderer sprite;
     [SerializeField] public PhysicsObject physics;
     [SerializeField] private ObjectType type;
-    //[SerializeField] private float mass;
 
-    // when CollisionManager detects a collision, the object that this object collided
-    // with will be sent here so that the objects can resolve the collision internally
+    // when CollisionManager detects a collision, the objects that this object collided
+    // with will be sent here so that each object can resolve the collisions internally
     internal List<ObjectInfo> collisions = new List<ObjectInfo>();
-
-    /*
-    /// <summary>
-    /// Gets a reference to this object's collision list
-    /// </summary>
-    public List<ObjectInfo> Collisions
-    { get { return collisions; } }
-    */
 
     /// <summary>
     /// Gets the object's type
@@ -65,40 +56,6 @@ public class ObjectInfo : MonoBehaviour
         // when an object is instantiated (either mid-game or at the beginning)
         // it should add itself to the Collision Manager's object list
         CollisionManager.Instance.GameObjects.Add(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        // change the sprite color in response to collisions
-        //  this is only because red gizmos do not show up in builds
-        if (collisions.Count > 0)
-        {
-            sprite.color = Color.red;
-        }
-        else
-        {
-            sprite.color = Color.white;
-        }
-        */
-    }
-
-    private void OnDrawGizmos()
-    {
-        /*
-        // if there are any unresolved collisions, the gizmos should be red
-        if (collisions.Count > 0)
-        {
-            Gizmos.color = Color.red;
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-        }
-
-        Gizmos.DrawWireSphere(transform.position, radius);
-        */
     }
 
     private void OnDestroy()
