@@ -25,10 +25,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private CanvasRenderer gameUIPanel;
     [SerializeField] private CanvasRenderer gameOverPanel;
 
+    [SerializeField] private GameObject playerPrefab;
+
     private GameObject player;
     private List<GameObject> enemies = new List<GameObject>();
 
     public GameState currentState = GameState.Menu;
+
+    private int round = 1;
+    private int score = 0;
 
     /// <summary>
     /// Gets or sets the game object that the player controls
@@ -39,6 +44,11 @@ public class GameManager : Singleton<GameManager>
     /// Gets a list of each enemy in the game
     /// </summary>
     public List<GameObject> Enemies { get { return enemies; } }
+
+    /// <summary>
+    /// Gets or sets the score this game
+    /// </summary>
+    public int Score { get { return score; } set { score = value; } }
 
     private void Start()
     {
@@ -62,7 +72,17 @@ public class GameManager : Singleton<GameManager>
                 // display player info
                 playerRotation.text = "Rotation Speed: " + player.GetComponent<PhysicsObject>().AngularVelocity;
                 playerSpeed.text = "Speed: " + player.GetComponent<PhysicsObject>().Velocity.magnitude;
+                scoreDisplay.text = "Score: " + score;
+                roundDisplay.text = "Round: " + round;
                 EnemiesDisplay.text = "Enemies: " + enemies.Count;
+
+                // spawn new enemies if the player destroyed all current ones
+                if(enemies.Count == 0)
+                {
+                    round++;
+                    SpawnEnemies(round);
+                }
+
                 break;
 
             case GameState.GameOver:
@@ -87,10 +107,48 @@ public class GameManager : Singleton<GameManager>
         helpPanel.gameObject.SetActive(false);
     }
 
+    public void QuitToMenu()
+    {
+        currentState = GameState.Menu;
+        menuPanel.gameObject.SetActive(true);
+        gameUIPanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
+    }
+
     public void StartGame()
     {
         currentState = GameState.Gameplay;
         menuPanel.gameObject.SetActive(false);
         gameUIPanel.gameObject.SetActive(true);
+        gameOverPanel.gameObject.SetActive(false);
+
+        // instantiate a new player for the scene
+        player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+
+        // reset game values
+        score = 0;
+        round = 1;
+
+        // clear any lefover enemies
+        foreach(GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        // spawn new ones
+        SpawnEnemies(round);
+    }
+
+    public void GameOver()
+    {
+        currentState = GameState.GameOver;
+        menuPanel.gameObject.SetActive(false);
+        gameUIPanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(true);
+    }
+
+    private void SpawnEnemies(int baseNumber)
+    {
+
     }
 }

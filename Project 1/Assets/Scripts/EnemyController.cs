@@ -5,14 +5,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] float accelSpeed;
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] PhysicsObject physicsMovement;
+    [SerializeField] int score;
 
     // Start is called before the first frame update
     void Start()
     {
         // when an enemy is instantiated, it should add itself to the Game Manager
         GameManager.Instance.Enemies.Add(gameObject);
+
+        // get a reference to the player
+        player = GameManager.Instance.Player;
     }
 
     // Update is called once per frame
@@ -30,6 +34,9 @@ public class EnemyController : MonoBehaviour
         if(GameManager.Instance != null)
         {
             GameManager.Instance.Enemies.Remove(gameObject);
+            GameManager.Instance.Score += score;
+
+            // when an enemy dies, it should give the player more anglular velocity
         }
     }
 }

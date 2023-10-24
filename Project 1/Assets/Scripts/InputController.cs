@@ -10,7 +10,7 @@ public class InputController : MonoBehaviour
     void Start()
     {
         // when the player is instantiated, it should add itself to the player field
-        GameManager.Instance.Player = gameObject;
+        //GameManager.Instance.Player = gameObject;
     }
 
     [SerializeField] private PhysicsObject playerControlledObject;
@@ -53,7 +53,7 @@ public class InputController : MonoBehaviour
         if (GameManager.Instance != null)
         {
             // when the player is destroyed (they die) set the game state to GameOver\
-            GameManager.Instance.currentState = GameState.GameOver;
+            GameManager.Instance.GameOver();
         }
     }
 }
