@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8742538545776668643}
   - component: {fileID: -7871556540511652807}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UIBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 304735212770729993}
   - component: {fileID: 3344647494589276952}
   - component: {fileID: 2600552191503181843}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Label_Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 58110445100081680}
   - component: {fileID: 3722058612661645534}
   - component: {fileID: 8306155817776658031}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Label_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 3379474383786267252}
   - component: {fileID: 2072010306620424723}
   - component: {fileID: 5009560997054217369}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Label_RotationSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

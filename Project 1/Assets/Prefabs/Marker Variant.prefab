@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marker Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -3888481672020999207, guid: 573fe9310f9a93649ae5d503528c3bd5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8742538545776668643, guid: 573fe9310f9a93649ae5d503528c3bd5, type: 3}
       propertyPath: m_RootOrder
       value: 1

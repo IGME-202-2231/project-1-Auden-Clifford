@@ -75,13 +75,13 @@ public class GameManager : Singleton<GameManager>
 
             case GameState.Gameplay:
                 // display player info
-                playerRotation.text = "Rotation Speed: " + player.GetComponent<PhysicsObject>().AngularVelocity;
-                playerSpeed.text = "Speed: " + player.GetComponent<PhysicsObject>().Velocity.magnitude;
-                scoreDisplay.text = "Score: " + score;
-                roundDisplay.text = "Round: " + round;
-                EnemiesDisplay.text = "Enemies: " + enemies.Count;
 
-                DrawMarkers();
+                // display rotation at different colors based whn it gets low
+                playerRotation.text = ((int)player.GetComponent<PhysicsObject>().AngularVelocity).ToString();
+                playerSpeed.text = ((int)player.GetComponent<PhysicsObject>().Velocity.magnitude).ToString();
+                scoreDisplay.text = score.ToString();
+                roundDisplay.text = round.ToString();
+                EnemiesDisplay.text = enemies.Count.ToString();
 
                 // spawn new enemies if the player destroyed all current ones
                 if(enemies.Count == 0)
@@ -93,6 +93,7 @@ public class GameManager : Singleton<GameManager>
                     SpawnEnemies(round);
                 }
 
+                DrawMarkers();
                 break;
 
             case GameState.GameOver:
@@ -229,7 +230,10 @@ public class GameManager : Singleton<GameManager>
     {
         foreach(GameObject enemy in enemies)
         {
-            enemy.GetComponent<EnemyController>().Marker.transform.position = player.transform.position + (enemy.transform.position - player.transform.position).normalized * markerRadius;
+            if(enemy.GetComponent<EnemyController>().Marker != null)
+            {
+                enemy.GetComponent<EnemyController>().Marker.transform.position = player.transform.position + (enemy.transform.position - player.transform.position).normalized * markerRadius;
+            }
         }
     }
 }
