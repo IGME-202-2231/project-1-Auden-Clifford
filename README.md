@@ -38,7 +38,7 @@ Unlike many Shmup games, this game will have physics-based interactions between 
 
 **Standard Enemy** (red band) - These enemies seek out the player and attempt to collide with them. They're small and a little slower than the player, however they are the most plentiful of the enemies and can easily overwhelm the player.
 
-**Shooter Enemy** (purple band) - These enemies will also approach the player's position, however, they are large and slow and tend to hang back out of the action. Instead of being a melee threat, when they get close to the player they shoot a fan of bullets out in a circle, causing chaos for friend and foe alike.
+**Shooter Enemy** (purple band) - These enemies will also approach the player's position, however, they are large and slow and tend to hang back out of the action. Instead of being a melee threat, when they get close to the player they shoot a fan of bullets out in a circle, causing chaos for friend and foe alike. Only one shooter enemy will spawn for every 5 standard enemies, so you could see one during your second round, or not until your 5th.
 
 ## Sources
 
@@ -52,6 +52,8 @@ Unlike many Shmup games, this game will have physics-based interactions between 
 ## Known Issues
 
 The forces involved in collisions are not accurate, momentum is not conserved when it should be. However, despite the fact that my physics sytem is essentially "faking it" (in my opinion) it works well enough to pass.
+
+Enemies sometimes spawn inside player; the collisions are quickly resolved, but this can unfairly disadvantage the player.
 
 ### Requirements not completed
 

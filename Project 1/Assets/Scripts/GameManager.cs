@@ -110,7 +110,7 @@ public class GameManager : Singleton<GameManager>
                 if(enemies.Count == 0)
                 {
                     // give the player an extra speed boost for finishing the round
-                    player.GetComponent<PhysicsObject>().SpeedUpSpin(round * 10);
+                    player.GetComponent<PhysicsObject>().SpeedUpSpin(round * Mathf.Sqrt(round) * 10);
 
                     round++;
                     SpawnEnemies(round);

@@ -2843,7 +2843,7 @@ MonoBehaviour:
     velocity.
 
 
-    Your rotational velodity decreases when you collide with other
+    Your rotational velocity decreases when you collide with other
     spinners or are hit by bullets.
 
 
