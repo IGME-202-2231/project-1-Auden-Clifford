@@ -3971,6 +3971,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1243656289}
     - target: {fileID: 480444220449207436, guid: be23f83d4bcae904483f0db25b5c0715, type: 3}
+      propertyPath: enemyFastPrefab
+      value: 
+      objectReference: {fileID: 254620762994097623, guid: 86aae48495bb7944f9d6ebf4f4e84c6d, type: 3}
+    - target: {fileID: 480444220449207436, guid: be23f83d4bcae904483f0db25b5c0715, type: 3}
       propertyPath: enemyShooterPrefab
       value: 
       objectReference: {fileID: 406857936554247329, guid: a07217258158bda4b89cf5f8fbe5a42b, type: 3}
