@@ -26,6 +26,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private CanvasRenderer gameOverPanel;
 
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject enemyStandardPrefab;
+    [SerializeField] private GameObject enemyShooterPrefab;
 
     private GameObject player;
     private List<GameObject> enemies = new List<GameObject>();
@@ -149,6 +151,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SpawnEnemies(int baseNumber)
     {
-
+        Instantiate(enemyShooterPrefab, new Vector3(10, 10, 0), Quaternion.identity);
+        Instantiate(enemyStandardPrefab, new Vector3(-10, -10, 0), Quaternion.identity);
     }
 }

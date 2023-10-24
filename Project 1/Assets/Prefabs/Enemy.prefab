@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2134655122719867536}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &375221785618919771
 MonoBehaviour:
@@ -64,8 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accelSpeed: 20
-  player: {fileID: 0}
   physicsMovement: {fileID: 3729130997991142718}
+  score: 100
+  weapon: {fileID: 0}
+  detectionRadius: 10
 --- !u!114 &3729130997991142718
 MonoBehaviour:
   m_ObjectHideFlags: 0

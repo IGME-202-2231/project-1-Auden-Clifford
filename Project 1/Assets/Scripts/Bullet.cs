@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
     {
         foreach(ObjectInfo otherObject in collisions)
         {
-            if(otherObject != Originator)
+            if(otherObject != Originator && otherObject.Type != ObjectType.Projectile)
             {
                 Gizmos.color = Color.red;
 

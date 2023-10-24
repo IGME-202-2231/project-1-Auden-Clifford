@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     GameObject player;
     [SerializeField] PhysicsObject physicsMovement;
     [SerializeField] int score;
+    [SerializeField] RadialFire weapon;
+    [SerializeField] float detectionRadius;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,17 @@ public class EnemyController : MonoBehaviour
     {
         if(GameManager.Instance.currentState == GameState.Gameplay)
         {
-            physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
+            // only move towards the player or shoot if they are within the detection radius
+            if (Vector3.Distance(player.transform.position, transform.position) < detectionRadius)
+            {
+                physicsMovement.ApplyForce((player.transform.position - transform.position).normalized * accelSpeed);
+
+                // if this enemy has the ability to fire a weapon, do so
+                if (weapon != null)
+                {
+                    weapon.Fire();
+                }
+            }
         }
     }
 
@@ -38,5 +50,10 @@ public class EnemyController : MonoBehaviour
 
             // when an enemy dies, it should give the player more anglular velocity
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }
